@@ -28,4 +28,20 @@ public class NotesStore {
         }
         return result;
     }
+
+
+    public static void remove(int id) throws IOException {
+        List<String> notes = readAll();
+        if (id <= 0 || id > notes.size()) {
+            System.out.println("Note with id " + id + " does not exist");
+            return;
+            }
+        notes.remove(id - 1); // удаляем по индексу
+        // Перезаписываем файл
+        try (FileWriter fw = new FileWriter(FILE_PATH)) {
+            for (int i = 0; i < notes.size(); i++) {
+                fw.write((i + 1) + ";" + notes.get(i).split(";", 2)[1] + "\n");
+            }
+        }
+    }
 }
