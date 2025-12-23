@@ -26,6 +26,13 @@ public class App {
                     System.out.println(n);
                 }
             }
+        } else if ("rm".equals(cmd)) {
+            try {
+                int id = Integer.parseInt(params.get("id"));
+                NotesStore.remove(id);
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid id");
+            }
         } else {
             System.out.println("Unknown command");
         }
